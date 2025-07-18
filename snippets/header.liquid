@@ -1,0 +1,14 @@
+<ul>
+{% for link in linklists.main-menu.links %}
+    <li>
+        <a href="{{ link.url }}">{{ link.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% if settings.search_enabled %}
+    <form action="/search" method="get" role="search">
+        <input type="search" name="q" placeholder="Search our store" aria-label="Search">
+        <button type="submit">Search</button>
+    </form>
+{% endif %}

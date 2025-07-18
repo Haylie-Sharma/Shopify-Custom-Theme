@@ -1,0 +1,6 @@
+
+        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description | truncate: 100 }}</p>
+        <p>Price: {{ product.price | money }}</p>
+ 

@@ -1,0 +1,11 @@
+<a href="{{ article.url }}" class="article-link">
+
+<article class="article">
+    {% if article.image %}
+            <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
+    {% endif %}
+    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <p>{{ article.excerpt | truncatewords: 50 }}</p>
+    <p class="article-meta">Posted on {{ article.published_at | date: "%B %d, %Y" }} by {{ article.author }}</p>
+</article>
+</a>

@@ -1,0 +1,14 @@
+
+{% paginate blog.articles by 2 %}
+<h2>{{ blog.title }}</h2>
+<div class="articles_container">
+    {% for article in blog.articles %}
+        {% render 'article', article: article %}
+    {% endfor %}
+    
+    {% if blog.articles.size == 0 %}
+        <p>No articles found in this blog.</p>
+    {% endif %}
+</div>
+{{- paginate | default_pagination -}}
+{% endpaginate %}

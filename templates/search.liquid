@@ -1,0 +1,37 @@
+{% if search.performed %}
+  <h2>Search Results for "{{ search.terms }}"</h2>
+    <ul>
+      {% for result in search.results %}
+        {% if result.object_type == 'product' %}
+          <li>
+            <a href="{{ result.url }}">
+              {% if result.image %}
+                <img src="{{ result.image | img_url: 'small' }}" alt="{{ result.title }}">
+              {% endif %}
+              {{ result.title }} - {{ result.price | money }}
+            </a>
+          </li>
+        {% elsif result.object_type == 'article' %}
+          <li>
+            <a href="{{ result.url }}">
+              {{ result.title }} (Blog: {{ result.blog.title }})
+            </a>
+          </li>
+        {% elsif result.object_type == 'page' %}
+          <li>
+            <a href="{{ result.url }}">
+              {{ result.title }}
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ result.url }}">
+              {{ result.title }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+{% else %}
+  <p>Try searching for something!</p>
+{% endif %}

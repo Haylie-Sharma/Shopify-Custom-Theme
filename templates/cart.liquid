@@ -1,0 +1,33 @@
+
+
+{% layout 'cart' %}
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+{% if cart.empty? %}
+    <h2>Your Cart is Empty</h2>
+    <p>Start shopping to add items to your cart!</p>
+    <a href="/collections/all">Browse Products</a>
+{% else %}
+  <h2>Your Cart</h2>
+  {% form 'cart', cart %}
+  <ul>
+    {% for item in cart.items %}
+        <li>
+            <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}">
+            <a href="{{ item.product.url }}">{{ item.product.title }}</a>
+            {{ item.price | money }}
+            {% if item.variant %}
+            ({{ item.variant.title }})
+            {% endif %}
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" class="quantity_input" data-line="{{ forloop.index }}">
+           <a href="{{ item.url_to_remove }}">Remove</a>
+            {{ item.final_line_price | money }}
+        </li>
+    {% endfor %}
+  </ul>
+  <p>Total: {{ cart.total_price | money }}</p>
+   <button type="submit" name="update" class="update_cart hidden">Update</button>
+  <button type="submit" name="checkout">Proceed to Checkout</button>
+    {% endform %}
+{% endif %}
+

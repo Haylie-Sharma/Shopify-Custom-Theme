@@ -1,0 +1,22 @@
+
+<p>Welcome to our store!</p>
+
+<section>
+    <h1>Collections</h1>
+    <ul>
+        {% for collection in collections %}
+        {% if collection.all_products_count > 0 and collection.image != blank %}
+        <li>
+            <a href="{{ collection.url }}">
+             {% if collection.image %}
+                <img src="{{ collection.image | img_url: 'medium' }}" alt="{{ collection.title }}">
+            {% endif %}
+            <h3>{{ collection.title }}</h3>
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</section>
+
+{{ content_for_index }}

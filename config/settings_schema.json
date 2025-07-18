@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Color Scheme",
+        "settings": [
+            {
+                "type": "color",
+                "id": "bg_color",
+                "label": "Background Color",
+                "default": "#f0f0f0"
+            },
+            {
+                "type": "color",
+                "id": "text_color",
+                "label": "Text Color",
+                "default": "#000000"
+            }
+        ]
+    },
+     {
+        "name": "Settings",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "search_enabled",
+                "label": "Enable Search",
+                "default": true
+            }
+        ]
+    }
+]

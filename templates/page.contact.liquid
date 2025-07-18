@@ -1,0 +1,62 @@
+<h2>{{ page.title }}</h2>
+<div class="page-content"> 
+  {{ page.content }}    
+</div>
+
+{% form 'contact' %}
+  {{ form.errors | default_errors }}
+
+  <div class="first-name">
+    <label for="first-name">First name</label>
+    <input type="text" name="contact[first_name]" id="first-name" />
+  </div>
+
+  <div class="last-name">
+    <label for="last-name">Last name</label>
+    <input type="text" name="contact[last_name]" id="last-name" />
+  </div>
+
+  <div class="phone">
+    <label for="phone">Phone</label>
+    <input type="tel" name="contact[phone]" id="phone" />
+  </div>
+
+  <div class="email">
+    <label for="email">Email</label>
+    <input type="email" name="contact[email]" id="email" />
+  </div>
+
+<div class="request-type">
+  <label for="request-type">What is this regarding?</label>
+  <select id="request-type" name="contact[request_type]">
+    <option>Returns</option>
+    <option>Shipping</option>
+    <option>Custom order</option>
+    <option>Other</option>
+  </select>
+</div>
+
+  <div class="message">
+    <label for="message">Message</label>
+    <textarea name="contact[body]" id="message"></textarea>
+  </div>
+
+  <div class="submit">
+    <input type="submit" value="Create" />
+  </div>
+{% endform %}
+
+{% if form.posted_successfully? %}
+  <p>Thank you for contacting us. We will get back to you soon.</p>
+{% endif %}
+
+{% if form.errors %}
+  <div class="errors">
+    <h3>Errors</h3>
+    <ul>
+      {% for error in form.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
