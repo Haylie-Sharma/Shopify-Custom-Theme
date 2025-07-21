@@ -1,10 +1,8 @@
-<ul>
-{% for link in linklists.main-menu.links %}
-    <li>
-        <a href="{{ link.url }}">{{ link.title }}</a>
-    </li>
-{% endfor %}
-</ul>
+ <nav class="header__navigation">
+      {% for link in menu.links %}
+        <a href="{{ link.url }}" class="header__navigation-link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
 
 {% if settings.search_enabled %}
     <form action="/search" method="get" role="search">

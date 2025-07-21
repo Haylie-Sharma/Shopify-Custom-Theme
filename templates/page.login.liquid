@@ -1,0 +1,27 @@
+{{ page.title }}
+
+{% form 'customer_login' %}
+  {{ form.errors | default_errors }}
+
+  <div class="email">
+    <label for="email">Email</label>
+    <input type="email" name="customer[email]">
+  </div>
+
+  <div class="password">
+    <label for="password">Password</label>
+    <input type="password" name="customer[password]">
+  </div>
+
+  <div class="submit">
+    <input type="submit" value="Sign in">
+  </div>
+{% endform %}
+
+{% if settings.customer_accounts_enabled %}
+  <p>Don't have an account? <a href="{{ /pages/register }}">Register</a></p>
+{% endif %}
+
+{% if settings.customer_forgot_password_enabled %}
+  <p><a href="{{ routes.account_forgot_password_url }}">Forgot your password?</a></p>
+{% endif %}

@@ -17,13 +17,12 @@
         ]
     },
      {
-        "name": "Settings",
+        "name": "settings",
         "settings": [
             {
-                "type": "checkbox",
-                "id": "search_enabled",
-                "label": "Enable Search",
-                "default": true
+                "type": "image_picker",
+                "id": "logo_image",
+                "label": "Logo Image"
             }
         ]
     }

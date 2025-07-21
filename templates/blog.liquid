@@ -1,14 +1,18 @@
-
-{% paginate blog.articles by 2 %}
-<h2>{{ blog.title }}</h2>
-<div class="articles_container">
-    {% for article in blog.articles %}
-        {% render 'article', article: article %}
-    {% endfor %}
-    
-    {% if blog.articles.size == 0 %}
+<div class="page-width">
+  {% paginate blog.articles by 6 %}
+    <h2 class="blog-title">{{ blog.title }}</h2>
+    <div class="blog-articles-grid">
+      {% for article in blog.articles %}
+        <div class="blog-article-card">
+          {% render 'article', article: article %}
+        </div>
+      {% endfor %}
+      {% if blog.articles.size == 0 %}
         <p>No articles found in this blog.</p>
-    {% endif %}
+      {% endif %}
+    </div>
+    <div class="blog-pagination">
+      {{- paginate | default_pagination -}}
+    </div>
+  {% endpaginate %}
 </div>
-{{- paginate | default_pagination -}}
-{% endpaginate %}

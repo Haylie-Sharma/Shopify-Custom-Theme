@@ -1,6 +1,7 @@
-
-        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.description | truncate: 100 }}</p>
-        <p>Price: {{ product.price | money }}</p>
+<div class="product-card">
+  <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" class="product-card__image" width="300" height="300">
+  <h2 class="product-card__title">{{ product.title }}</h2>
+  <p class="product-card__description">{{ product.description | truncate: 100 }}</p>
+  <p class="product-card__price">{{ product.price | money }}</p>
+</div>
  

@@ -1,33 +1,80 @@
 
-
 {% layout 'cart' %}
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
-{% if cart.empty? %}
-    <h2>Your Cart is Empty</h2>
-    <p>Start shopping to add items to your cart!</p>
-    <a href="/collections/all">Browse Products</a>
-{% else %}
-  <h2>Your Cart</h2>
-  {% form 'cart', cart %}
-  <ul>
-    {% for item in cart.items %}
-        <li>
-            <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}">
-            <a href="{{ item.product.url }}">{{ item.product.title }}</a>
-            {{ item.price | money }}
-            {% if item.variant %}
-            ({{ item.variant.title }})
-            {% endif %}
-            <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" class="quantity_input" data-line="{{ forloop.index }}">
-           <a href="{{ item.url_to_remove }}">Remove</a>
-            {{ item.final_line_price | money }}
-        </li>
-    {% endfor %}
-  </ul>
-  <p>Total: {{ cart.total_price | money }}</p>
-   <button type="submit" name="update" class="update_cart hidden">Update</button>
-  <button type="submit" name="checkout">Proceed to Checkout</button>
+<div class="cart-container">
+  <div class="page-width">
+  {% if cart.empty? %}
+    <div class="cart-empty">
+      <div class="cart-empty-title">Your Cart is Empty</div>
+      <p>Start shopping to add items to your cart!</p>
+      <a href="/collections/all" class="cart-empty-link">Browse Products</a>
+    </div>
+  {% else %}
+    <div class="cart-title">Your Cart</div>
+    {% form 'cart', cart %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Variant</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+        <tr>
+          <td>
+            <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}" class="cart-product-img" width="60" height="60"><br>
+            <a href="{{ item.product.url }}" class="cart-product-title">{{ item.product.title }}</a>
+          </td>
+          <td class="cart-variant">{% unless item.variant.title == 'Default Title' %}{{ item.variant.title }}{% endunless %}</td>
+          <td>{{ item.price | money }}</td>
+          <td>
+            <div class="cart-quantity-selector" data-line="{{ forloop.index }}">
+              <button type="button" class="cart-quantity-btn" data-action="decrement">-</button>
+              <input type="text" class="cart-quantity-input" name="updates[]" value="{{ item.quantity }}" min="1" readonly>
+              <button type="button" class="cart-quantity-btn" data-action="increment">+</button>
+            </div>
+          </td>
+          <td>{{ item.final_line_price | money }}</td>
+          <td><a href="{{ item.url_to_remove }}" class="cart-remove">Remove</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="cart-total">Total: {{ cart.total_price | money }}</div>
+    <div class="cart-actions">
+      <button type="submit" name="update" class="cart-btn update" id="update-cart-btn" style="display:none;">Update Cart</button>
+      <button type="submit" name="checkout" class="cart-btn">Proceed to Checkout</button>
+    </div>
     {% endform %}
-{% endif %}
+  {% endif %}
+  </div>
+</div>
+<script>
+// Quantity selector logic for cart
+const cartQtySelectors = document.querySelectorAll('.cart-quantity-selector');
+const updateCartBtn = document.getElementById('update-cart-btn');
+cartQtySelectors.forEach(function(selector) {
+  const decBtn = selector.querySelector('[data-action="decrement"]');
+  const incBtn = selector.querySelector('[data-action="increment"]');
+  const qtyInput = selector.querySelector('.cart-quantity-input');
+  decBtn.addEventListener('click', function() {
+    let val = parseInt(qtyInput.value, 10);
+    if (val > 1) {
+      qtyInput.value = val - 1;
+      if(updateCartBtn) updateCartBtn.style.display = '';
+    }
+  });
+  incBtn.addEventListener('click', function() {
+    let val = parseInt(qtyInput.value, 10);
+    qtyInput.value = val + 1;
+    if(updateCartBtn) updateCartBtn.style.display = '';
+  });
+});
+</script>
 

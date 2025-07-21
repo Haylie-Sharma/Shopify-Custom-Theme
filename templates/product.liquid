@@ -1,22 +1,68 @@
-<h2>{{ product.title }}</h2>
-
-
-{% if product.featured_image %}
-    <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
-{% endif %}
-<p>{{ product.description }}</p>    
-<p>Price: {{ product.price | money }}</p>
-
-{% if product.available %}
-    {% form 'product', product %}
-         <select name="id">
+<div class="product-page">
+  <div class="product-page__image">
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" width="500" height="500">
+    {% endif %}
+  </div>
+  <div class="product-page__content">
+    <h2 class="product-title">{{ product.title }}</h2>
+    <div class="product-price">{{ product.price | money }}</div>
+    <div class="product-description">{{ product.description }}</div>
+    {% if product.available %}
+      {% assign non_default_variants = product.variants | reject: 'title', 'Default Title' %}
+      {% form 'product', product, class: 'product-form' %}
+        {% for variant in product.variants %}
+          {% if variant.title == 'Default Title' %}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+          {% endif %}
+        {% endfor %}
+        {% if non_default_variants.size > 0 %}
+          <div class="variant-buttons">
             {% for variant in product.variants %}
-                <option value="{{ variant.id }}">{{ variant.title }}</option>
+              {% unless variant.title == 'Default Title' %}
+                <input type="radio" id="variant-{{ variant.id }}" name="id" value="{{ variant.id }}" class="variant-radio" {% if forloop.first %}checked{% endif %} style="display:none;">
+                <label for="variant-{{ variant.id }}" class="variant-button{% if forloop.first %} selected{% endif %}">{{ variant.title }}</label>
+              {% endunless %}
             {% endfor %}
-        </select>
-        <input type="number" name="quantity" value="1" min="1">
+          </div>
+        {% endif %}
+        <div class="quantity-selector">
+          <button type="button" class="quantity-btn" id="decrement-qty">-</button>
+          <input type="text" class="quantity-input" name="quantity" id="quantity-input" value="1" min="1" readonly>
+          <button type="button" class="quantity-btn" id="increment-qty">+</button>
+        </div>
         <button type="submit">{{ 'general.add_to_cart' | t }}</button>
-    {% endform %}
-{% else %}
-    <button disabled>Out of Stock</button>
-{% endif %}
+      {% endform %}
+    {% else %}
+      <button class="product-form" disabled>Out of Stock</button>
+    {% endif %}
+  </div>
+</div>
+<script>
+// Variant button selection logic
+const variantLabels = document.querySelectorAll('.variant-button');
+const variantRadios = document.querySelectorAll('.variant-radio');
+if (variantLabels.length && variantRadios.length) {
+  variantLabels.forEach((label, idx) => {
+    label.addEventListener('click', function(e) {
+      variantLabels.forEach(l => l.classList.remove('selected'));
+      this.classList.add('selected');
+      if (variantRadios[idx]) variantRadios[idx].checked = true;
+    });
+  });
+}
+// Quantity selector logic
+const qtyInput = document.getElementById('quantity-input');
+const decBtn = document.getElementById('decrement-qty');
+const incBtn = document.getElementById('increment-qty');
+if (qtyInput && decBtn && incBtn) {
+  decBtn.addEventListener('click', function() {
+    let val = parseInt(qtyInput.value, 10);
+    if (val > 1) qtyInput.value = val - 1;
+  });
+  incBtn.addEventListener('click', function() {
+    let val = parseInt(qtyInput.value, 10);
+    qtyInput.value = val + 1;
+  });
+}
+</script>

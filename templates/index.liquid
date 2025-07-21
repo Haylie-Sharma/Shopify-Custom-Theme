@@ -1,22 +1,21 @@
-
-<p>Welcome to our store!</p>
-
-<section>
-    <h1>Collections</h1>
-    <ul>
-        {% for collection in collections %}
+<div class="page-width">
+  <p class="index-welcome">Welcome to our store!</p>
+  <section class="index-collections">
+    <h1 class="index-collections-title">Collections</h1>
+    <ul class="index-collections-grid">
+      {% for collection in collections %}
         {% if collection.all_products_count > 0 and collection.image != blank %}
         <li>
-            <a href="{{ collection.url }}">
-             {% if collection.image %}
-                <img src="{{ collection.image | img_url: 'medium' }}" alt="{{ collection.title }}">
+          <a href="{{ collection.url }}" class="index-collection-link">
+            {% if collection.image %}
+              <img src="{{ collection.image | img_url: 'medium' }}" alt="{{ collection.title }}" class="index-collection-img" width="240" height="240">
             {% endif %}
-            <h3>{{ collection.title }}</h3>
-            </a>
+            <h3 class="index-collection-title">{{ collection.title }}</h3>
+          </a>
         </li>
         {% endif %}
-        {% endfor %}
+      {% endfor %}
     </ul>
-</section>
-
-{{ content_for_index }}
+  </section>
+  {{ content_for_index }}
+</div>

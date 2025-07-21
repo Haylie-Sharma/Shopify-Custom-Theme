@@ -1,0 +1,122 @@
+<header class="header-section">
+  <div class="header page-width">
+    <nav class="header__nav">
+      {% assign menu = section.settings.menu %}
+      {% render 'menu', menu: menu %}
+    </nav>
+    <div class="header__logo">
+      <a href="{{ shop.url }}" class="header__logo-link">
+      {% if settings.logo_image != blank %}
+        <img src="{{ settings.logo_image | img_url: '' }}" alt="{{ shop.name }}" class="header__logo-image">
+      {% else %}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {% endif %}
+      </a>
+    </div>
+    <div class="header__utilities">
+      {% if settings.search_enabled %}
+        <form action="/search" method="get" class="header__search-form" role="search">
+          <input type="search" name="q" placeholder="Search our store" aria-label="Search" class="header__search-input">
+          <button type="submit" class="header__search-button">Search</button>
+        </form>
+      {% endif %}
+      {% if customer %}
+        <a href="{{ routes.account_url }}">Account</a>
+      {% else %}
+        <a href="{{ routes.account_login_url }}">Login</a>
+        {% if shop.customer_accounts_optional %}
+          <span>or</span>
+          <a href="/pages/register">Create an account</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "search_enabled",
+      "label": "Enable search",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle Left"
+        },
+        {
+          "value": "middle-center",
+          "label": "Middle Center"
+        }
+      ],
+      "default": "middle-left",
+      "label": "Logo Position"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

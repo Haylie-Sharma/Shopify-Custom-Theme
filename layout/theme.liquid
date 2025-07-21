@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ shop.locale }}">
 <head>
-    {{ content_for_header }}
+    {% comment %} {{ content_for_header }} {% endcomment %}
     {{ 'style.css' | asset_url | stylesheet_tag }}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 </head>
 <body>
-  {% include 'header' %}
-    {{ content_for_layout }}
-  
-    {{ 'scripts.js' | asset_url | script_tag }}
+  {% section 'header' %}
+  {{ content_for_layout }}
 </body>
 </html>
