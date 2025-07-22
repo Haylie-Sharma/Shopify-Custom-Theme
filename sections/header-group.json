@@ -1,0 +1,18 @@
+{
+    "name": "Header Group",
+    "type": "header",
+    "sections": {
+        "header": {
+            "type": "header",
+            "settings": {
+                "menu": "main-menu",
+                "logo_image": "logo.png",
+                "search_enabled": true,
+                "account_enabled": true,
+                "cart_enabled": true
+            }
+        }
+      
+    },
+    "order": ["header"]
+}

@@ -1,0 +1,72 @@
+<div class="page-width">
+    <div class="article-main">
+      <h1 class="article-title">{{ article.title }}</h1>
+      <div class="article-meta-main">
+        <span class="article-meta-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
+        <span class="article-meta-author">by {{ article.author }}</span>
+      </div>
+      {% if article.image %}
+        <img src="{{ article.image | img_url: 'master' }}" alt="{{ article.title }}" class="article-featured-image" width="900" height="500">
+      {% endif %}
+      <div class="article-content">
+        {{ article.content }}
+      </div>
+    </div>
+  
+    <div class="article-comments-section">
+      {% if article.comments_enabled? %}
+        <h2 class="article-comments-title">Comments</h2>
+        {% if article.comments_count > 0 %}
+          <div class="article-comments-list">
+            {% paginate article.comments by 20 %}
+              {% for comment in article.comments %}
+                <div class="article-comment">
+                  <div class="article-comment-header">
+                    <span class="article-comment-author">{{ comment.author }}</span>
+                    <span class="article-comment-date">{{ comment.created_at | date: "%B %d, %Y" }}</span>
+                  </div>
+                  <div class="article-comment-content">{{ comment.content }}</div>
+                </div>
+              {% endfor %}
+              <div class="article-comments-pagination">{{ paginate | default_pagination }}</div>
+            {% endpaginate %}
+          </div>
+        {% else %}
+          <p class="article-no-comments">No comments yet. Be the first to comment!</p>
+        {% endif %}
+      {% endif %}
+  
+      <div class="article-comment-form">
+        <h2 class="article-comments-title">Leave a comment!</h2>
+        {% form 'new_comment', article %}
+          {{ form.errors | default_errors }}
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" name="comment[author]" value="{{ form.author }}">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" name="comment[email]" value="{{ form.email }}">
+          </div>
+          <div class="form-row">
+            <label for="comment">Comment</label>
+            <textarea name="comment[body]">{{ form.body }}</textarea>
+          </div>
+          <div class="form-row">
+            <input type="submit" value="Post Comment">
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+  {% schema %}
+  {
+    "name": "Main Article",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Main Article"
+      }
+    ]
+  }
+  {% endschema %}

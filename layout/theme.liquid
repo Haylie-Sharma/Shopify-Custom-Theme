@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ shop.locale }}">
 <head>
-    {% comment %} {{ content_for_header }} {% endcomment %}
+    {{ content_for_header }}
     {{ 'style.css' | asset_url | stylesheet_tag }}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 </head>
-<body>
-  {% section 'header' %}
+<body {% if template == 'page.contact' %}class="contact-page"{% endif %}>
+  {% sections 'header-group' %}
   {{ content_for_layout }}
+  {% sections 'footer-group' %}
 </body>
 </html>
