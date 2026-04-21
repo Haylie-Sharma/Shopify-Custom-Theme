@@ -1,0 +1,30 @@
+<div class="page-width">
+    {% paginate blog.articles by 6 %}
+      <h2 class="blog-title">{{ blog.title }}</h2>
+      <div class="blog-articles-grid">
+        {% for article in blog.articles %}
+          <div class="blog-article-card">
+            {% render 'article', article: article %}
+          </div>
+        {% endfor %}
+        {% if blog.articles.size == 0 %}
+          <p>No articles found in this blog.</p>
+        {% endif %}
+      </div>
+      <div class="blog-pagination">
+        {{- paginate | default_pagination -}}
+      </div>
+    {% endpaginate %}
+  </div>
+  {% schema %}
+  {
+    "name": "Blog",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Blog"
+      }
+    ]
+  }
+  {% endschema %}
+  

@@ -1,0 +1,52 @@
+{% assign collection = section.settings.collection %}
+{% for product in collection.products %}
+    <div class="gradient">
+        <div class="page-width">
+          <div class="image-with-text image-with-text--image_first isolate{% if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0 %} collapse-borders{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <div class="image-with-text__grid grid grid--gapless grid--1-col grid--2-col-tablet {% if forloop.index % 2 != 0 %} image-with-text__grid--reverse{% endif %}">
+              <div class="image-with-text__media-item image-with-text__media-item--medium image-with-text__media-item--top grid__item">
+                <div
+                  class="image-with-text__media image-with-text__media--adapt global-media-settings{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}{% if section.settings.image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}"
+                  {% if product.featured_image != blank %}
+                    style="padding-bottom: {{ 1 | divided_by: product.featured_image.aspect_ratio | times: 100 }}%;"
+                  {% endif %}
+                >
+                  {%- if product.featured_image != blank -%}
+                   
+                      {%- assign widths = '165, 360, 535, 750, 1070, 1500' -%}
+                      {%- capture sizes -%}
+                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                  {%- endcapture -%}
+        
+                    {{
+                      product.featured_image
+                      | image_url: width: 1500
+                      | image_tag: sizes: sizes, widths: widths, fetchpriority: fetch_priority
+                    }}
+                  {%- else -%}
+                    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="image-with-text__text-item grid__item">
+                <div
+                  id="ImageWithText--{{ section.id }}"
+                  class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.height }} content-container{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}"
+                >     
+                        <h2
+                          class="image-with-text__heading inline-richtext">
+                         {{ product.title }}
+                        </h2>
+                 
+                        <div class="image-with-text__text rte">
+                            {{ product.description }}
+                        </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+

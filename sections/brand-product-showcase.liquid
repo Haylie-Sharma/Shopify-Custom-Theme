@@ -1,0 +1,71 @@
+{% assign featured_collection = collections[section.settings.collection] %}
+<section class="brand-section brand-section--soft">
+  <div class="page-width">
+    <div class="brand-section__head">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+
+    {% if featured_collection != blank and featured_collection.products_count > 0 %}
+      <div class="brand-products-grid">
+        {% for product in featured_collection.products limit: section.settings.products_to_show %}
+          <a href="{{ product.url }}" class="brand-product-card">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 800 }}"
+                alt="{{ product.title }}"
+                class="brand-product-card__image"
+                loading="lazy"
+                width="340"
+                height="420"
+              >
+            {% endif %}
+            <h3 class="brand-product-card__title">{{ product.title }}</h3>
+            <p class="brand-product-card__price">{{ product.price | money }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="brand-empty-note">Select a collection in this section to show featured products.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Best sellers"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Purses women love right now"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}

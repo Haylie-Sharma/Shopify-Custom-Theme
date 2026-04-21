@@ -1,0 +1,76 @@
+<section class="brand-section brand-section--soft">
+  <div class="page-width">
+    <div class="brand-section__head brand-section__head--center">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="brand-featured-on">
+      {% for block in section.blocks %}
+        <div class="brand-featured-on__item" {{ block.shopify_attributes }}>
+          {% if block.settings.logo != blank %}
+            <img
+              src="{{ block.settings.logo | image_url: width: 280 }}"
+              alt="{{ block.settings.name | default: 'Press logo' }}"
+              loading="lazy"
+              width="140"
+              height="60"
+            >
+          {% else %}
+            <span>{{ block.settings.name }}</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured on",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Featured on"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Seen in leading fashion publications"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Fashion Weekly"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Featured on",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

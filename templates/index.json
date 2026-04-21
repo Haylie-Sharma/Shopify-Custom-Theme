@@ -1,0 +1,340 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "brand_hero_mrJmYm": {
+      "type": "brand-hero",
+      "blocks": {
+        "hero_slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "",
+            "eyebrow": "New in",
+            "title": "Made for every moment",
+            "subtitle": "Shop statement bags and everyday icons designed to move with your lifestyle.",
+            "primary_button_label": "Shop new arrivals",
+            "primary_button_link": "/collections/all",
+            "secondary_button_label": "View collections",
+            "secondary_button_link": "/collections"
+          }
+        },
+        "hero_slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "",
+            "eyebrow": "Most loved",
+            "title": "Trending silhouettes for modern women",
+            "subtitle": "Discover top handle, shoulder, and crossbody styles in premium finishes.",
+            "primary_button_label": "Shop best sellers",
+            "primary_button_link": "/collections/all",
+            "secondary_button_label": "Explore categories",
+            "secondary_button_link": "/collections"
+          }
+        }
+      },
+      "block_order": [
+        "hero_slide_1",
+        "hero_slide_2"
+      ],
+      "settings": {
+        "eyebrow": "Timeless handbags for modern women",
+        "title": "Signature purses crafted for everyday elegance",
+        "subtitle": "Discover versatile silhouettes, premium materials, and thoughtful details designed to carry your day beautifully.",
+        "primary_button_label": "Shop New Arrivals",
+        "primary_button_link": "/collections/all",
+        "secondary_button_label": "Explore Collections",
+        "secondary_button_link": "/collections",
+        "auto_rotate_seconds": 5
+      }
+    },
+    "category_grid_N2jkPq": {
+      "type": "brand-category-grid",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "title": "Carry-ons",
+            "image": "",
+            "collection": "",
+            "link": "/collections/all"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Everyday icons",
+            "image": "",
+            "collection": "",
+            "link": "/collections/all"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Desk drops",
+            "image": "",
+            "collection": "",
+            "link": "/collections/all"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "title": "Day to night",
+            "image": "",
+            "collection": "",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ],
+      "settings": {
+        "eyebrow": "Made for every moment",
+        "title": "Carry-ons for every style",
+        "full_width": true
+      }
+    },
+    "featured_collections_jn2a9D": {
+      "type": "brand-featured-collections",
+      "blocks": {
+        "collection_Aa3Qme": {
+          "type": "collection",
+          "settings": {
+            "collection": "all"
+          }
+        },
+        "collection_Bv7xTq": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_Cm8wLp": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_Aa3Qme",
+        "collection_Bv7xTq",
+        "collection_Cm8wLp"
+      ],
+      "settings": {
+        "eyebrow": "Shop by style",
+        "title": "Curated collections for every mood",
+        "full_width": true
+      }
+    },
+    "fullwidth_cards_P4mSx2": {
+      "type": "brand-fullwidth-image-cards",
+      "blocks": {
+        "fw_card_1": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "eyebrow": "New drop",
+            "title": "Signature top-handle series",
+            "link": "/collections/all"
+          }
+        },
+        "fw_card_2": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "eyebrow": "Editors pick",
+            "title": "Everyday icons for workwear",
+            "link": "/collections/all"
+          }
+        },
+        "fw_card_3": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "eyebrow": "Weekend edit",
+            "title": "Crossbody and mini statement styles",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "fw_card_1",
+        "fw_card_2",
+        "fw_card_3"
+      ],
+      "settings": {
+        "eyebrow": "Something new",
+        "title": "Editorial card slider"
+      }
+    },
+    "featured_products_Zx3oRt": {
+      "type": "brand-product-showcase",
+      "settings": {
+        "eyebrow": "Best sellers",
+        "title": "Purses women love right now",
+        "collection": "all",
+        "products_to_show": 4
+      }
+    },
+    "product_rail_q3NwLs": {
+      "type": "brand-product-rail",
+      "blocks": {
+        "rail_tab_1": {
+          "type": "collection_tab",
+          "settings": {
+            "title": "All bestsellers",
+            "collection": "all"
+          }
+        },
+        "rail_tab_2": {
+          "type": "collection_tab",
+          "settings": {
+            "title": "Tote bags",
+            "collection": ""
+          }
+        },
+        "rail_tab_3": {
+          "type": "collection_tab",
+          "settings": {
+            "title": "Shoulder bags",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "rail_tab_1",
+        "rail_tab_2",
+        "rail_tab_3"
+      ],
+      "settings": {
+        "eyebrow": "Most-loved styles",
+        "title": "Trending now",
+        "products_to_show": 10
+      }
+    },
+    "editorial_u7TmQx": {
+      "type": "brand-editorial",
+      "settings": {
+        "eyebrow": "In the spotlight",
+        "title": "Elevated silhouettes for work, travel, and evenings out",
+        "text": "From structured totes to statement shoulder bags, discover modern pieces that blend utility with polished style.",
+        "image": "",
+        "button_label": "Shop the spotlight",
+        "button_link": "/collections/all"
+      }
+    },
+    "brand_values_V5uJ8d": {
+      "type": "brand-value-props",
+      "blocks": {
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "title": "Premium craftsmanship",
+            "text": "Every purse is made with thoughtfully chosen materials and fine finishing details for long-lasting quality."
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "title": "Designed for daily life",
+            "text": "Spacious interiors, smart compartments, and comfortable straps keep your essentials organized all day."
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "title": "Modern feminine style",
+            "text": "From statement textures to classic neutrals, our designs complement both casual and dressy looks."
+          }
+        }
+      },
+      "block_order": [
+        "value_1",
+        "value_2",
+        "value_3"
+      ],
+      "settings": {
+        "eyebrow": "Why customers choose us",
+        "title": "Designed for style, built for life"
+      }
+    },
+    "featured_on_Jm6pKr": {
+      "type": "brand-featured-on",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "Grazia",
+            "logo": ""
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "Harper's Bazaar",
+            "logo": ""
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Cosmopolitan",
+            "logo": ""
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Elle",
+            "logo": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4"
+      ],
+      "settings": {
+        "eyebrow": "Featured on",
+        "title": "Seen in leading fashion publications"
+      }
+    },
+    "brand_cta_i4PmW7": {
+      "type": "brand-cta",
+      "settings": {
+        "eyebrow": "The Haylie edit",
+        "title": "Ready to find your new favorite purse?",
+        "text": "Explore statement pieces and everyday essentials made to elevate your wardrobe.",
+        "button_label": "Shop all products",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": [
+    "brand_hero_mrJmYm",
+    "category_grid_N2jkPq",
+    "fullwidth_cards_P4mSx2",
+    "featured_collections_jn2a9D",
+    "featured_products_Zx3oRt",
+    "product_rail_q3NwLs",
+    "editorial_u7TmQx",
+    "brand_values_V5uJ8d",
+    "featured_on_Jm6pKr",
+    "brand_cta_i4PmW7"
+  ]
+}

@@ -1,0 +1,54 @@
+<section class="brand-section brand-section--flush">
+  <div class="brand-full-width">
+    <div class="brand-section__head brand-full-width__head">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="brand-fw-cards" data-fw-cards="{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.settings.image != blank %}
+          <a href="{{ block.settings.link | default: routes.collections_url }}" class="brand-fw-card" {{ block.shopify_attributes }}>
+            <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.title }}" class="brand-fw-card__image" loading="lazy" width="560" height="680">
+            <div class="brand-fw-card__overlay">
+              <p>{{ block.settings.eyebrow }}</p>
+              <h3>{{ block.settings.title }}</h3>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Full width image cards",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Something new" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Editorial card slider" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New drop" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Luxury shoulder edit" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Full width image cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,36 @@
+<div class="text-with-image">
+  <div class="text-with-image-content">
+    <h2 class="text-with-image-title">{{ section.settings.title }}</h2>
+    <div class="text-with-image-text">{{ section.settings.text }}</div>
+  </div>
+  <div class="text-with-image-image">
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}">
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Text with image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with image"
+    }
+  ]
+}
+{% endschema %}

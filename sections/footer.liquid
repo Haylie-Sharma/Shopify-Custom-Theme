@@ -1,0 +1,29 @@
+<footer class="brand-footer">
+  <div class="page-width brand-footer__inner">
+    <div>
+      <a href="{{ routes.root_url }}" class="brand-footer__logo">{{ shop.name }}</a>
+      <p class="brand-footer__text">Modern handbags designed for everyday ambition and effortless elegance.</p>
+    </div>
+    <div>
+      <h3 class="brand-footer__title">Shop</h3>
+      <ul class="brand-footer__links">
+        <li><a href="{{ routes.collections_url }}">All collections</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}">All products</a></li>
+        <li><a href="{{ routes.cart_url }}">Cart</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="brand-footer__title">Support</h3>
+      <ul class="brand-footer__links">
+        <li><a href="/pages/contact">Contact</a></li>
+        <li><a href="{{ routes.search_url }}">Search</a></li>
+        <li><a href="{{ routes.account_url }}">Account</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="brand-footer__bottom">
+    <div class="page-width">
+      <p>© {{ "now" | date: "%Y" }} {{ shop.name }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

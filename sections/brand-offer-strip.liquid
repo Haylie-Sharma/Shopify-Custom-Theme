@@ -1,0 +1,45 @@
+<section class="brand-offer-strip">
+  <div class="brand-offer-strip__track">
+    {% for block in section.blocks %}
+      <span class="brand-offer-strip__item" {{ block.shopify_attributes }}>
+        {{ block.settings.text }}
+      </span>
+    {% endfor %}
+    {% for block in section.blocks %}
+      <span class="brand-offer-strip__item brand-offer-strip__item--ghost">
+        {{ block.settings.text }}
+      </span>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Offer strip",
+  "blocks": [
+    {
+      "type": "offer",
+      "name": "Offer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Buy any 2, get extra 10% OFF"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Offer strip",
+      "blocks": [
+        { "type": "offer" },
+        { "type": "offer" },
+        { "type": "offer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

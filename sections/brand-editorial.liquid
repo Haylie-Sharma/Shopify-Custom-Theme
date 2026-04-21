@@ -1,0 +1,75 @@
+<section class="brand-section brand-section--soft">
+  <div class="page-width">
+    <div class="brand-editorial">
+      <div class="brand-editorial__content">
+        <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+        <p class="brand-editorial__text">{{ section.settings.text }}</p>
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="brand-button brand-button--primary">
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+      {% if section.settings.image != blank %}
+        <div class="brand-editorial__image-wrap">
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            alt="{{ section.settings.title }}"
+            class="brand-editorial__image"
+            loading="lazy"
+            width="620"
+            height="760"
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "In the spotlight"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Elevated silhouettes for work, travel, and evenings out"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "From structured totes to statement shoulder bags, discover modern pieces that blend utility with polished style."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the spotlight"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial spotlight"
+    }
+  ]
+}
+{% endschema %}

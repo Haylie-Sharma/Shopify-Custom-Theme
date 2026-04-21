@@ -1,0 +1,12 @@
+ <nav class="header__navigation">
+      {% for link in menu.links %}
+        <a href="{{ link.url }}" class="header__navigation-link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+{% if settings.search_enabled %}
+    <form action="/search" method="get" role="search">
+        <input type="search" name="q" placeholder="Search our store" aria-label="Search">
+        <button type="submit">Search</button>
+    </form>
+{% endif %}

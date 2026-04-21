@@ -1,0 +1,103 @@
+<section class="brand-section">
+  <div class="{% if section.settings.full_width %}brand-full-width{% else %}page-width{% endif %}">
+    <div class="brand-section__head">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="brand-category-grid{% if section.settings.full_width %} brand-category-grid--full{% endif %}">
+      {% for block in section.blocks %}
+        {% assign linked_collection = collections[block.settings.collection] %}
+        {% assign card_url = block.settings.link %}
+        {% assign card_image = block.settings.image %}
+        {% if linked_collection != blank %}
+          {% assign card_url = linked_collection.url %}
+          {% if card_image == blank and linked_collection.image != blank %}
+            {% assign card_image = linked_collection.image %}
+          {% endif %}
+        {% endif %}
+        {% if card_image != blank %}
+          <a href="{{ card_url | default: routes.collections_url }}" class="brand-category-card" {{ block.shopify_attributes }}>
+            <img
+              src="{{ card_image | image_url: width: 900 }}"
+              alt="{{ block.settings.title }}"
+              class="brand-category-card__image"
+              loading="lazy"
+              width="360"
+              height="420"
+            >
+            <div class="brand-category-card__overlay">
+              <h3>{{ block.settings.title }}</h3>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Made for every moment"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Carry-ons for every style"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Everyday Icons"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Fallback link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Category grid",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

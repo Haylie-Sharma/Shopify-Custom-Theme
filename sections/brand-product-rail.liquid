@@ -1,0 +1,147 @@
+<section class="brand-section">
+  <div class="page-width">
+    <div class="brand-rail-head">
+      <div>
+        <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+      </div>
+      <div class="brand-rail-controls">
+        <button type="button" class="brand-rail-btn" data-rail-prev="{{ section.id }}" aria-label="Previous products">&larr;</button>
+        <button type="button" class="brand-rail-btn" data-rail-next="{{ section.id }}" aria-label="Next products">&rarr;</button>
+      </div>
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="brand-rail-tabs" data-rail-tabs="{{ section.id }}">
+        {% for block in section.blocks %}
+          {% assign tab_collection = collections[block.settings.collection] %}
+          {% if tab_collection != blank %}
+            <button class="brand-rail-tab{% if forloop.first %} is-active{% endif %}" data-rail-tab="{{ section.id }}" data-rail-index="{{ forloop.index0 }}">{{ block.settings.title | default: tab_collection.title }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% for block in section.blocks %}
+        {% assign rail_collection = collections[block.settings.collection] %}
+        {% if rail_collection != blank and rail_collection.products_count > 0 %}
+          <div class="brand-product-rail-wrap{% if forloop.first %} is-active{% endif %}" data-rail-wrap="{{ section.id }}" data-rail-index="{{ forloop.index0 }}">
+            <div class="brand-product-rail" data-rail-track="{{ section.id }}-{{ forloop.index0 }}">
+              {% for product in rail_collection.products limit: section.settings.products_to_show %}
+                <a href="{{ product.url }}" class="brand-product-rail__item">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}" class="brand-product-rail__image" loading="lazy" width="260" height="320">
+                  {% endif %}
+                  <h3>{{ product.title }}</h3>
+                  <p>{{ product.price | money }}</p>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p class="brand-empty-note">Add collection blocks to show products in this section.</p>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (function() {
+    var sectionId = {{ section.id | json }};
+    var prev = document.querySelector('[data-rail-prev="' + sectionId + '"]');
+    var next = document.querySelector('[data-rail-next="' + sectionId + '"]');
+    var tabs = document.querySelectorAll('[data-rail-tab="' + sectionId + '"]');
+    var wraps = document.querySelectorAll('[data-rail-wrap="' + sectionId + '"]');
+    if (!prev || !next || wraps.length === 0) return;
+
+    function activeTrack() {
+      var activeWrap = document.querySelector('[data-rail-wrap="' + sectionId +'"].is-active');
+      if (!activeWrap) return null;
+      return activeWrap.querySelector('[data-rail-track]');
+    }
+
+    function scrollByAmount(track) {
+      return Math.max(280, Math.round(track.clientWidth * 0.7));
+    }
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var idx = tab.getAttribute('data-rail-index');
+        tabs.forEach(function(btn) { btn.classList.remove('is-active'); });
+        wraps.forEach(function(wrap) { wrap.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        var target = document.querySelector('[data-rail-wrap="' + sectionId + '"][data-rail-index="' + idx + '"]');
+        if (target) target.classList.add('is-active');
+      });
+    });
+
+    prev.addEventListener('click', function() {
+      var track = activeTrack();
+      if (!track) return;
+      track.scrollBy({ left: -scrollByAmount(track), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function() {
+      var track = activeTrack();
+      if (!track) return;
+      track.scrollBy({ left: scrollByAmount(track), behavior: 'smooth' });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product rail",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Most-loved styles"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Trending now"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab label",
+          "default": "Bestsellers"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Product rail",
+      "blocks": [
+        { "type": "collection_tab" },
+        { "type": "collection_tab" },
+        { "type": "collection_tab" }
+      ]
+    }
+  ]
+}
+{% endschema %}

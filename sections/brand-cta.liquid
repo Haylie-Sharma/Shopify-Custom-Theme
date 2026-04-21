@@ -1,0 +1,54 @@
+<section class="brand-cta">
+  <div class="page-width brand-cta__inner">
+    <p class="brand-cta__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 class="brand-cta__title">{{ section.settings.title }}</h2>
+    <p class="brand-cta__text">{{ section.settings.text }}</p>
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="brand-button brand-button--primary">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Haylie edit"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ready to find your new favorite purse?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Explore statement pieces and everyday essentials made to elevate your wardrobe."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop all products"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand CTA"
+    }
+  ]
+}
+{% endschema %}

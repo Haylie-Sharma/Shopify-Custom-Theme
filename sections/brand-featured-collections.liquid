@@ -1,0 +1,82 @@
+<section class="brand-section">
+  <div class="{% if section.settings.full_width %}brand-full-width{% else %}page-width{% endif %}">
+    <div class="brand-section__head">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="brand-collections-grid{% if section.settings.full_width %} brand-collections-grid--full{% endif %}">
+      {% for block in section.blocks %}
+        {% assign featured_collection = collections[block.settings.collection] %}
+        {% if featured_collection != blank %}
+          <a href="{{ featured_collection.url }}" class="brand-collection-card" {{ block.shopify_attributes }}>
+            {% if featured_collection.image %}
+              <img
+                src="{{ featured_collection.image | image_url: width: 900 }}"
+                alt="{{ featured_collection.title }}"
+                class="brand-collection-card__image"
+                loading="lazy"
+                width="420"
+                height="420"
+              >
+            {% endif %}
+            <div class="brand-collection-card__content">
+              <h3>{{ featured_collection.title }}</h3>
+              <span>Shop now</span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop by style"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Curated collections for every mood"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Featured collections",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}

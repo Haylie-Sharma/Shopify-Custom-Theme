@@ -1,0 +1,68 @@
+<section class="brand-section">
+  <div class="page-width">
+    <div class="brand-section__head brand-section__head--center">
+      <p class="brand-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="brand-section__title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="brand-values-grid">
+      {% for block in section.blocks %}
+        <article class="brand-value-card" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why customers choose us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Designed for style, built for life"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium craftsmanship"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Each purse is constructed with carefully selected materials and precise detailing for long-lasting beauty."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Brand values",
+      "blocks": [
+        { "type": "value" },
+        { "type": "value" },
+        { "type": "value" }
+      ]
+    }
+  ]
+}
+{% endschema %}
