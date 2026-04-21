@@ -15,7 +15,7 @@
         "hero_slide_1": {
           "type": "slide",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/banner-1.webp",
             "eyebrow": "New in",
             "title": "Made for every moment",
             "subtitle": "Shop statement bags and everyday icons designed to move with your lifestyle.",
@@ -28,7 +28,7 @@
         "hero_slide_2": {
           "type": "slide",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/slide3.webp",
             "eyebrow": "Most loved",
             "title": "Trending silhouettes for modern women",
             "subtitle": "Discover top handle, shoulder, and crossbody styles in premium finishes.",
@@ -61,7 +61,7 @@
           "type": "category",
           "settings": {
             "title": "Carry-ons",
-            "image": "",
+            "image": "shopify://shop_images/Necklace_Feature_Or_New_Items_Feature.webp",
             "collection": "",
             "link": "/collections/all"
           }
@@ -70,7 +70,7 @@
           "type": "category",
           "settings": {
             "title": "Everyday icons",
-            "image": "",
+            "image": "shopify://shop_images/leahs-picks_9f1046.webp",
             "collection": "",
             "link": "/collections/all"
           }
@@ -79,7 +79,7 @@
           "type": "category",
           "settings": {
             "title": "Desk drops",
-            "image": "",
+            "image": "shopify://shop_images/instaE.jpg",
             "collection": "",
             "link": "/collections/all"
           }
@@ -88,7 +88,7 @@
           "type": "category",
           "settings": {
             "title": "Day to night",
-            "image": "",
+            "image": "shopify://shop_images/instaD.jpg",
             "collection": "",
             "link": "/collections/all"
           }
@@ -103,40 +103,7 @@
       "settings": {
         "eyebrow": "Made for every moment",
         "title": "Carry-ons for every style",
-        "full_width": true
-      }
-    },
-    "featured_collections_jn2a9D": {
-      "type": "brand-featured-collections",
-      "blocks": {
-        "collection_Aa3Qme": {
-          "type": "collection",
-          "settings": {
-            "collection": "all"
-          }
-        },
-        "collection_Bv7xTq": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection_Cm8wLp": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection_Aa3Qme",
-        "collection_Bv7xTq",
-        "collection_Cm8wLp"
-      ],
-      "settings": {
-        "eyebrow": "Shop by style",
-        "title": "Curated collections for every mood",
-        "full_width": true
+        "full_width": false
       }
     },
     "fullwidth_cards_P4mSx2": {
@@ -145,7 +112,7 @@
         "fw_card_1": {
           "type": "card",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/insta07.jpg",
             "eyebrow": "New drop",
             "title": "Signature top-handle series",
             "link": "/collections/all"
@@ -154,7 +121,7 @@
         "fw_card_2": {
           "type": "card",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/insta04.webp",
             "eyebrow": "Editors pick",
             "title": "Everyday icons for workwear",
             "link": "/collections/all"
@@ -163,7 +130,7 @@
         "fw_card_3": {
           "type": "card",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/insta010.jpg",
             "eyebrow": "Weekend edit",
             "title": "Crossbody and mini statement styles",
             "link": "/collections/all"
@@ -176,8 +143,52 @@
         "fw_card_3"
       ],
       "settings": {
-        "eyebrow": "Something new",
-        "title": "Editorial card slider"
+        "eyebrow": "",
+        "title": ""
+      }
+    },
+    "featured_collections_jn2a9D": {
+      "type": "brand-featured-collections",
+      "blocks": {
+        "collection_Aa3Qme": {
+          "type": "collection",
+          "settings": {
+            "collection": "from-day-to-night"
+          }
+        },
+        "collection_Bv7xTq": {
+          "type": "collection",
+          "settings": {
+            "collection": "color-blocking"
+          }
+        },
+        "collection_Cm8wLp": {
+          "type": "collection",
+          "settings": {
+            "collection": "designer-jewelry"
+          }
+        }
+      },
+      "block_order": [
+        "collection_Aa3Qme",
+        "collection_Bv7xTq",
+        "collection_Cm8wLp"
+      ],
+      "settings": {
+        "eyebrow": "Shop by style",
+        "title": "Curated collections for every mood",
+        "full_width": false
+      }
+    },
+    "editorial_u7TmQx": {
+      "type": "brand-editorial",
+      "settings": {
+        "eyebrow": "In the spotlight",
+        "title": "Elevated silhouettes for work, travel, and evenings out",
+        "text": "From structured totes to statement shoulder bags, discover modern pieces that blend utility with polished style.",
+        "image": "shopify://shop_images/instaA.jpg",
+        "button_label": "Shop the spotlight",
+        "button_link": "/collections/all"
       }
     },
     "featured_products_Zx3oRt": {
@@ -203,14 +214,14 @@
           "type": "collection_tab",
           "settings": {
             "title": "Tote bags",
-            "collection": ""
+            "collection": "jewelry"
           }
         },
         "rail_tab_3": {
           "type": "collection_tab",
           "settings": {
             "title": "Shoulder bags",
-            "collection": ""
+            "collection": "bags"
           }
         }
       },
@@ -223,17 +234,6 @@
         "eyebrow": "Most-loved styles",
         "title": "Trending now",
         "products_to_show": 10
-      }
-    },
-    "editorial_u7TmQx": {
-      "type": "brand-editorial",
-      "settings": {
-        "eyebrow": "In the spotlight",
-        "title": "Elevated silhouettes for work, travel, and evenings out",
-        "text": "From structured totes to statement shoulder bags, discover modern pieces that blend utility with polished style.",
-        "image": "",
-        "button_label": "Shop the spotlight",
-        "button_link": "/collections/all"
       }
     },
     "brand_values_V5uJ8d": {
@@ -277,29 +277,25 @@
         "logo_1": {
           "type": "logo",
           "settings": {
-            "name": "Grazia",
-            "logo": ""
+            "name": "Grazia"
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
-            "name": "Harper's Bazaar",
-            "logo": ""
+            "name": "Harper's Bazaar"
           }
         },
         "logo_3": {
           "type": "logo",
           "settings": {
-            "name": "Cosmopolitan",
-            "logo": ""
+            "name": "Cosmopolitan"
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
-            "name": "Elle",
-            "logo": ""
+            "name": "Elle"
           }
         }
       },
@@ -309,6 +305,7 @@
         "logo_3",
         "logo_4"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Featured on",
         "title": "Seen in leading fashion publications"
@@ -331,8 +328,8 @@
     "fullwidth_cards_P4mSx2",
     "featured_collections_jn2a9D",
     "featured_products_Zx3oRt",
-    "product_rail_q3NwLs",
     "editorial_u7TmQx",
+    "product_rail_q3NwLs",
     "brand_values_V5uJ8d",
     "featured_on_Jm6pKr",
     "brand_cta_i4PmW7"
