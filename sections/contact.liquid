@@ -1,0 +1,175 @@
+<section class="contact-page-section color-{{ section.settings.color_scheme }}" style="padding-top: calc(var(--spacing-unit, 2rem) * {{ section.settings.spacing_top }}); padding-bottom: calc(var(--spacing-unit, 2rem) * {{ section.settings.spacing_bottom }});">
+  <div class="{% if section.settings.full_width %}brand-full-width{% else %}page-width{% endif %}">
+    <h2 class="page-title">{{ section.settings.title }}</h2>
+    {% if section.settings.description != blank %}
+      <div class="page-content">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+
+      <div class="article-main">
+        {% form 'contact' %}
+          <div class="article-comment-form">
+            {% if form.errors %}
+              <div class="errors">
+                <h3>We couldn't process your request</h3>
+                <ul>
+                  {% for error in form.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            <div class="form-row form-row--two-col">
+              <div>
+                <label for="first-name">First name</label>
+                <input type="text" name="contact[first_name]" id="first-name" required />
+              </div>
+              <div>
+                <label for="last-name">Last name</label>
+                <input type="text" name="contact[last_name]" id="last-name" required />
+              </div>
+            </div>
+
+            <div class="form-row form-row--two-col">
+              <div>
+                <label for="email">Email</label>
+                <input type="email" name="contact[email]" id="email" required />
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input type="tel" name="contact[phone]" id="phone" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="request-type">What is this regarding?</label>
+              <select id="request-type" name="contact[request_type]" required>
+                <option value="">Select an option</option>
+                <option>Returns</option>
+                <option>Shipping</option>
+                <option>Custom order</option>
+                <option>General inquiry</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea name="contact[body]" id="message" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <input type="submit" value="{{ section.settings.button_text }}" />
+            </div>
+
+            {% if form.posted_successfully? %}
+              <p style="color: #2f7d32; background: #e8f5e9; padding: 1rem; border-radius: 2px; margin-top: 1.5rem;">{{ section.settings.success_message }}</p>
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Get in touch"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Have a question? We'd love to hear from you."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Submit button text",
+      "default": "Send message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for contacting us. We will get back to you soon."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "spacing_top",
+      "label": "Spacing - Top",
+      "options": [
+        {"value": "0", "label": "None"},
+        {"value": "1", "label": "Extra Small"},
+        {"value": "2", "label": "Small"},
+        {"value": "3", "label": "Medium"},
+        {"value": "4", "label": "Large"},
+        {"value": "5", "label": "Extra Large"}
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "spacing_bottom",
+      "label": "Spacing - Bottom",
+      "options": [
+        {"value": "0", "label": "None"},
+        {"value": "1", "label": "Extra Small"},
+        {"value": "2", "label": "Small"},
+        {"value": "3", "label": "Medium"},
+        {"value": "4", "label": "Large"},
+        {"value": "5", "label": "Extra Large"}
+      ],
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {"value": "background-1", "label": "Default"},
+        {"value": "background-2", "label": "Secondary"},
+        {"value": "inverse", "label": "Inverse"},
+        {"value": "accent-1", "label": "Accent 1"},
+        {"value": "accent-2", "label": "Accent 2"}
+      ],
+      "default": "background-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact page"
+    }
+  ]
+}
+{% endschema %}

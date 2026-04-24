@@ -1,0 +1,94 @@
+<section class="brand-section brand-section--soft">
+  <div class="page-width">
+    <div class="brand-section__head brand-section__head--center">
+      <p class="brand-section__eyebrow">Search</p>
+      {% if search.performed %}
+        <h2 class="brand-section__title">Search Results for "{{ search.terms }}"</h2>
+      {% else %}
+        <h2 class="brand-section__title">Find what you need</h2>
+      {% endif %}
+    </div>
+
+
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <div class="search-results-summary">
+          <p>Showing {{ search.results.size }} result{% if search.results.size != 1 %}s{% endif %} for <strong>{{ search.terms }}</strong></p>
+        </div>
+
+        <div class="search-results-grid">
+          {% for result in search.results %}
+            {% assign result_image = result.image | default: result.featured_image %}
+
+            {% if result.object_type == 'product' %}
+              <a href="{{ result.url }}" class="brand-product-card search-result-card">
+                {% if result_image %}
+                  <img src="{{ result_image | img_url: '400x400' }}" alt="{{ result.title }}" class="brand-product-card__image">
+                {% endif %}
+                <h3 class="brand-product-card__title">{{ result.title }}</h3>
+                {% if result.price != blank %}
+                  <p class="brand-product-card__price">{{ result.price | money }}</p>
+                {% endif %}
+                <span class="search-result-card__badge">Product</span>
+              </a>
+
+            {% elsif result.object_type == 'collection' %}
+              <a href="{{ result.url }}" class="brand-collection-card search-result-card">
+                {% if result_image %}
+                  <img src="{{ result_image | img_url: '400x400' }}" alt="{{ result.title }}" class="brand-collection-card__image">
+                {% endif %}
+                <div class="brand-collection-card__content">
+                  <h3>{{ result.title }}</h3>
+                  <span>Collection</span>
+                </div>
+              </a>
+
+            {% elsif result.object_type == 'article' %}
+              <a href="{{ result.url }}" class="blog-article-card search-result-card">
+                {% if result_image %}
+                  <img src="{{ result_image | img_url: '400x400' }}" alt="{{ result.title }}" class="blog-article-card__image">
+                {% endif %}
+                <div class="article-meta">Article · {{ result.blog.title }}</div>
+                <h3 class="search-result-card__title">{{ result.title }}</h3>
+                <p class="article-excerpt">{{ result.excerpt | strip_html | truncate: 100 }}</p>
+              </a>
+
+            {% else %}
+              <a href="{{ result.url }}" class="search-results-item search-result-card">
+                {% if result_image %}
+                  <img src="{{ result_image | img_url: '400x400' }}" alt="{{ result.title }}" class="search-results-item__image">
+                {% endif %}
+                <div class="search-results-item__content">
+                  <h3 class="search-results-item__title">{{ result.title }}</h3>
+                  <div class="search-results-item__meta">{{ result.object_type | capitalize }}</div>
+                  <p class="search-results-item__snippet">{{ result.excerpt | strip_html | truncate: 140 }}</p>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="search-results-note">
+          <p>No results found for <strong>"{{ search.terms }}"</strong>. Try something else — search for a product, collection, or topic.</p>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="search-results-note">
+        <p>Try something else — search for a product, collection, or topic.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Search results",
+      "category": "Search"
+    }
+  ]
+}
+{% endschema %}

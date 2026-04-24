@@ -14,7 +14,7 @@
   <div class="header page-width">
     <div class="header__left">
       {% if section.settings.search_enabled %}
-        <a href="{{ routes.search_url }}" class="header__icon-link" aria-label="Search">Search</a>
+        <button type="button" class="header__icon-link header__search-toggle" data-header-search-toggle="{{ section.id }}" aria-expanded="false" aria-controls="header-search-{{ section.id }}">Search</button>
       {% endif %}
     </div>
 
@@ -33,6 +33,33 @@
       <a href="{{ routes.cart_url }}" class="header__icon-link" aria-label="Cart">Cart ({{ cart.item_count }})</a>
     </div>
   </div>
+
+  {% if section.settings.search_enabled %}
+    <div class="header__search-wrapper" id="header-search-{{ section.id }}" data-header-search-wrapper="{{ section.id }}">
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+      <predictive-search>
+        <form action="/search" method="get" role="search" class="header__search-form predictive-search-form">
+          <label class="visually-hidden" for="HeaderSearch">Search</label>
+          <input
+            id="HeaderSearch"
+            class="header__search-input"
+            type="search"
+            name="q"
+            placeholder="Search our store"
+            aria-label="Search our store"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-owns="predictive-search-results-header"
+            aria-controls="predictive-search-results-header"
+          />
+          <input name="options[prefix]" type="hidden" value="last" />
+          <button type="submit" class="header__search-button">Search</button>
+          <button type="button" class="header__search-close" data-header-search-close="{{ section.id }}" aria-label="Close search">×</button>
+          <div id="predictive-search-results-header" tabindex="-1" class="predictive-search-box"></div>
+        </form>
+      </predictive-search>
+    </div>
+  {% endif %}
 
   {% assign menu = section.settings.menu %}
   {% if menu != blank and menu.links.size > 0 %}
@@ -63,6 +90,47 @@
         {% endfor %}
       </div>
     </nav>
+  {% endif %}
+
+  {% if section.settings.search_enabled %}
+    <script>
+      (function() {
+        function initHeaderSearch() {
+          var sectionId = {{ section.id | json }};
+          var toggle = document.querySelector('[data-header-search-toggle="' + sectionId + '"]');
+          var wrapper = document.querySelector('[data-header-search-wrapper="' + sectionId + '"]');
+          var closeButton = document.querySelector('[data-header-search-close="' + sectionId + '"]');
+          if (!toggle || !wrapper) return;
+
+          function setOpen(open) {
+            wrapper.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (open) {
+              var input = wrapper.querySelector('input[type="search"]');
+              if (input) input.focus();
+            }
+          }
+
+          toggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            setOpen(!wrapper.classList.contains('is-open'));
+          });
+
+          if (closeButton) {
+            closeButton.addEventListener('click', function(event) {
+              event.preventDefault();
+              setOpen(false);
+            });
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initHeaderSearch);
+        } else {
+          initHeaderSearch();
+        }
+      })();
+    </script>
   {% endif %}
 </header>
 {% schema %}

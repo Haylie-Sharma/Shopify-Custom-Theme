@@ -1,0 +1,29 @@
+{%- if predictive_search.performed -%}
+  <div id="predictive-search-results" class="predictive-search-results">
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <div class="predictive-search-results__section">
+        <div class="predictive-search-results__heading">
+          <h3 id="predictive-search-products">Products</h3>
+        </div>
+        <ul role="listbox" aria-labelledby="predictive-search-products" class="predictive-search-results__list">
+          {%- for product in predictive_search.resources.products -%}
+            <li role="option">
+              <a href="{{ product.url }}" class="predictive-search-results__item">
+                {% if product.featured_image != blank %}
+                  <img src="{{ product.featured_image | img_url: '80x80' }}" alt="{{ product.title }}" class="predictive-search-results__image" />
+                {% endif %}
+                <span class="predictive-search-results__title">{{ product.title }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- else -%}
+      <div class="predictive-search-results__empty">No quick results found.</div>
+    {%- endif -%}
+
+    <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}" class="predictive-search-results__more">
+      Search for “{{ predictive_search.terms }}”
+    </a>
+  </div>
+{%- endif -%}

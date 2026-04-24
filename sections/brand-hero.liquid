@@ -1,4 +1,4 @@
-<section class="brand-hero" data-brand-hero="{{ section.id }}" data-auto-seconds="{{ section.settings.auto_rotate_seconds }}">
+<section class="brand-hero color-{{ section.settings.color_scheme }}" data-brand-hero="{{ section.id }}" data-auto-seconds="{{ section.settings.auto_rotate_seconds }}" style="padding-top: calc(var(--spacing-unit, 2rem) * {{ section.settings.spacing_top }}); padding-bottom: calc(var(--spacing-unit, 2rem) * {{ section.settings.spacing_bottom }});">
   <div class="brand-hero-slider">
     {% assign has_valid_image_slide = false %}
     {% for block in section.blocks %}
@@ -91,6 +91,69 @@
 {
   "name": "Brand hero",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "spacing_top",
+      "label": "Spacing - Top",
+      "options": [
+        {"value": "0", "label": "None"},
+        {"value": "1", "label": "Extra Small"},
+        {"value": "2", "label": "Small"},
+        {"value": "3", "label": "Medium"},
+        {"value": "4", "label": "Large"},
+        {"value": "5", "label": "Extra Large"}
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "spacing_bottom",
+      "label": "Spacing - Bottom",
+      "options": [
+        {"value": "0", "label": "None"},
+        {"value": "1", "label": "Extra Small"},
+        {"value": "2", "label": "Small"},
+        {"value": "3", "label": "Medium"},
+        {"value": "4", "label": "Large"},
+        {"value": "5", "label": "Extra Large"}
+      ],
+      "default": "0"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {"value": "background-1", "label": "Default"},
+        {"value": "background-2", "label": "Secondary"},
+        {"value": "inverse", "label": "Inverse"},
+        {"value": "accent-1", "label": "Accent 1"},
+        {"value": "accent-2", "label": "Accent 2"}
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
     {
       "type": "text",
       "id": "eyebrow",
